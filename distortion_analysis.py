@@ -1,4 +1,5 @@
 import os
+import time
 import yaml
 import traceback
 import numpy as np
@@ -25,6 +26,7 @@ def calc_point_groups(dim_str, kpt, index, amplitude=5):
     
     ### Calculate its point group
     os.system(f'phonopy -q --symmetry -c MPOSCAR > sym.txt')
+    time.sleep(0.5) # delay to allow file to finish writing
     with open('sym.txt') as f:
         lines = f.readlines()
         return lines[3].split()[-1].strip("'")
